@@ -57,7 +57,7 @@ public class Population {
 	/*Step 5
 	 * create a method that will count the lines in the file. This will tell
 	 * us how big our arrays need to be. When you're done with the method 
-	 * create a println with a call to the method in main for testing. 
+	 * create a println with a call to the method in main() for testing. 
 	 * Notice here, we will not write the exception throw in the method
 	 * definition line, instead we'll just use a more traditional try/catch
 	 * block.
@@ -135,7 +135,7 @@ public class Population {
 	    displayFooter(boros,years,counties,codes,names,populations);
 	}
 	/*Step7
-	 * create a method called displayData with 6 of our data arrays as
+	 * create a method called displayData() with 6 of our data arrays as
 	 * parameters. Only use the int populations[] array. We no longer need
 	 * the String popString[] array.
 	 */
@@ -150,9 +150,9 @@ public class Population {
 				+ "--------------------------------------------+");
 		/*Step 8
 		 * Create for loop using printf to create a neat table of data. Do a 
-		 * function call to displayData at the bottom of getData(), making sure
+		 * function call to displayData() at the bottom of getData(), making sure
 		 * to pass the appropriate arrays as arguments. 
-		 * After your done and you make sure all is aligned correctly and your
+		 * After you're done and you make sure all is aligned correctly and your
 		 * fields are the correct size and properly justified, you can
 		 * create a nice ASCII header above the for loop as I have done 
 		 * here with column headings. 
