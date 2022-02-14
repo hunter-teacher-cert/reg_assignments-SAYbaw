@@ -15,6 +15,8 @@ output_wHeader.png
 
 output_wFooter.png
 
+README.md
+
 # File Reading and Data Processing in Java
 ### By Steve Sabaugh
 
