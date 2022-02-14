@@ -31,8 +31,8 @@ import java.util.*;
 public class Population {
 
 	public static void main(String[] args) throws FileNotFoundException  {
-		displayRawData();//Step 4 call in main to see result
-		System.out.println(lineCt());//data dump for step 5
+		//displayRawData();//Step 4 call in main to see result
+		//System.out.println(lineCt());//data dump for step 5
 		getData();
 		
 	}
