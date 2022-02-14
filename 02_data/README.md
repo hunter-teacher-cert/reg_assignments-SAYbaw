@@ -11,6 +11,10 @@ Project folder: A1_Data_SEDC729
 
 New_York_City_Population_By_Neighborhood_Tabulation_Areas.csv
 
+output_wHeader.png
+
+output_wFooter.png
+
 # File Reading and Data Processing in Java
 ### By Steve Sabaugh
 
@@ -39,7 +43,7 @@ method after your parameters write "throws FileNotFoundExcetion" before
 the curly braces as shown below. This is an alternative to a try/catch 
 block.
 
-public static void main(String[] args) throws FileNotFoundException  {
+	public static void main(String[] args) throws FileNotFoundException  {
 
 Step 3 
 Create a static method to read and display the raw data from
@@ -48,9 +52,9 @@ the file using the Scanner class.
 Step 4
 Call in main() method to see the result.
 
-Public static void main(String[] args) throws FileNotFoundException  {
+	Public static void main(String[] args) throws FileNotFoundException  {
 		displayRawData();
-}
+	}
 
 Step 5
 Create a method that will count the lines in the file. This will tell
@@ -79,12 +83,12 @@ make sure all is aligned correctly and your fields are the correct size
 and properly justified, you can create a nice ASCII header above the for 
 loop as I have done here with column headings. 
 
-System.out.println("+----------------------------- NYC Population"
+	System.out.println("+----------------------------- NYC Population"
 				+ " by Neighborhood -----------------------------+");
 				
-System.out.println("|Borough      |Year|FIPS|NTA|NAME               "
+	System.out.println("|Borough      |Year|FIPS|NTA|NAME               "
 				+ "                                |Population|");
-System.out.println("+----------------------------------------------"
+	System.out.println("+----------------------------------------------"
 				+ "--------------------------------------------+");
 
 Step 9
