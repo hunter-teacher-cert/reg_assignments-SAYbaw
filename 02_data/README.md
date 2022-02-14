@@ -98,7 +98,7 @@ Finally, we make a footer, writing a method called displayFooter, for our
 table to display at the bottom. This is where all the processing and 
 statistical number crunching of the program happens. Again the parameters 
 will be the same as displayData(), and we will call it immediately after 
-displayData() in the getDat() method with the same exact arguments.
+displayData() in the getData() method with the same exact arguments.
 
 NOTE: For further instruction and comments, please see marked up
 source code in this folder Population.java.
