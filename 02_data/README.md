@@ -61,7 +61,7 @@ Call in main() method to see the result.
 Step 5
 Create a method that will count the lines in the file. This will tell
 us how big our arrays need to be. When you're done with the method 
-create a println with a call to the method in main for testing. 
+create a println with a call to the method in main() for testing. 
 Notice here, we will not write the exception throw in the method
 definition line, instead we'll just use a more traditional try/catch
 block.
@@ -74,7 +74,7 @@ of the methods will be called from this method, because this is where
 we create the most important variables, our data arrays.
 
 Step7
-Create a method called displayData with 6 of our data arrays as
+Create a method called displayData() with 6 of our data arrays as
 parameters.
 
 Step 8
