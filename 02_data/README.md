@@ -21,7 +21,7 @@ creating an ASCII table in console/terminal, and processing the data by
 writing a min/max algorithm and averaging the data. Other key java concepts 
 like modularization and passing arrays as arguments are covered as are 
 different versions of exception handling (since file manipulation must be 
-done in Java with try/catch or other exception techniques.
+done in Java with try/catch or other exception techniques).
 
 The source code is marked up with comments of the step by step process of 
 how the lesson will be taught. I will repeat those comments here.
