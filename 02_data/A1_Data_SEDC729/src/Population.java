@@ -14,8 +14,8 @@
  * New-York-City-Population-By-Neighborhood-Tabulatio/swpk-hqdp
  * csv file. Open it a text editor and remove first line or "header"
  * and make sure that data begins at very top of the file. Rename 
- * file "populations.txt" for simplicity sake and add file to same file 
- * as your source folder.
+ * file "populations.txt" for simplicity sake and add file to same folder 
+ * as your source file.
  */
 
 /* Step 2 
