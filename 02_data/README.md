@@ -71,7 +71,7 @@ This getData() method will read and sort the data into arrays so we can
 manipulate and display the data in our program. We will call this from 
 main(). This will also be the last method called from main as the rest
 of the methods will be called from this method, because this is where
-we create are most important variables, our data arrays.
+we create the most important variables, our data arrays.
 
 Step7
 Create a method called displayData with 6 of our data arrays as
@@ -79,8 +79,8 @@ parameters.
 
 Step 8
 Create for loop using printf to create a neat table of data. Do a 
-function call to displayData at the bottom of getData(), making sure
-to pass the appropriate arrays as arguments. After your done and you 
+function call to displayData() at the bottom of getData(), making sure
+to pass the appropriate arrays as arguments. After you're done and you 
 make sure all is aligned correctly and your fields are the correct size 
 and properly justified, you can create a nice ASCII header above the for 
 loop as I have done here with column headings. 
@@ -94,7 +94,7 @@ loop as I have done here with column headings.
 				+ "--------------------------------------------+");
 
 Step 9
-Finally, we make a footer, writing a method called displayFooter, for our 
+Finally, we make a footer, writing a method called displayFooter(), for our 
 table to display at the bottom. This is where all the processing and 
 statistical number crunching of the program happens. Again the parameters 
 will be the same as displayData(), and we will call it immediately after 
