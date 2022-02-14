@@ -7,7 +7,7 @@
  * writing a min/max algorithm and averaging the data. Other key java concepts like modularization 
  * passing arrays as arguments are covered as are different versions of 
  * exception handling (since file manipulation must be done in Java with 
- * try/catch or other exception techniques. )*/
+ * try/catch or other exception techniques).*/
 
  /* Step1 
  * Download https://data.cityofnewyork.us/City-Government/
