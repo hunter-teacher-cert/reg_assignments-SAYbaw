@@ -213,7 +213,7 @@ public class Population {
 				minBoro, min);
 		System.out.printf("Largest: %s, %s at %d residents.\n", maxName, 
 				maxBoro, max);
-		System.out.printf("Average: %.1f residents per neighberhood.\n", avg);
+		System.out.printf("Average: %.1f residents per neighborhood.\n", avg);
 		
 		
 		
