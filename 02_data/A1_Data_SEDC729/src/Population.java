@@ -171,7 +171,7 @@ public class Population {
 	 * This is where all the processing and statistical number crunching
 	 * of the program happens. Again the parameters will be the same as
 	 * displayData(), and we will call it immediately after displayData()
-	 * in the getDat() method with the same exact arguments.
+	 * in the getData() method with the same exact arguments.
 	 */
 	public static void displayFooter(String bor[], String yr[], String cty[],
 			String code[], String name[], int pops[]) {
