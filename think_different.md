@@ -62,7 +62,11 @@ RPN or Reverse Polish Notation, yes, old HP calculator programming language. Alt
 simple and it covers all of the important features of programming, including methods/functions/subroutines, iteration, decision, branching, IPO, and variables, which are literally calculator memory slots. It is the least verbose language there is, there is no punctuation, and you can do some complex mathematical 
 programming. You can also do simple little math programs. Each program line is one command or one digit. There are web or desktop RPN environments. The following
 is an example of a Gamma Function program on the HP 67 or HP 15. This obviously would not be a project for differentiation. I'm just showing it so you can see all
-of the programming concepts it covers.
+of the programming concepts it covers. 
+
+NOTE: Ignore the number(s) after the line number and before the mnemonic. Those numbers are the key codes of the calculator
+used for debugging on a calculator. (e.g. in line 001, 31 is the LBL (label) key, 25 is the shift key 11 is the A key. First digit row, second digit column on 
+keypad)
 
     001  31 25 11	LBL A //main
     002  01		1
