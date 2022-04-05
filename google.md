@@ -53,3 +53,68 @@ https://codedost.com/java/star-patterns-in-java/java-program-to-print-a-pattern-
 https://javatutoring.com/java-mirrored-right-triangle-star-pattern/
 
 I thought the assignment was going to be too hard because I gave the easiest pattern as my example, but after reading the search results, I think it would be just enough of a challenge to use these results to do my assignment.  You could copy and paste it but you would definitely need to edit the logic to make the program work, so I’m not sure that would be beneficial.
+
+### My Solutions
+      
+    /**
+    *
+    * @author Steve Sabaugh
+    */
+    public class TriangleDraw {
+      public static void main(String[] args) {
+        int row;
+        int col;
+        int count = 5;
+        String space = "";
+        
+        System.out.println("Triangle 1 method 1");
+        for (row = 1; row <= 5; row++){
+            for (col = 5; col >= row; col--)
+                System.out.print("*");
+            System.out.println();
+        }
+        
+        System.out.println("Triangle 1 method 2");
+        for (row = 1; row <= 5; row++) {
+            for (col = row; col <= 5; col++)
+                System.out.print("*");
+            System.out.println();
+        }
+        
+        System.out.println("Triangle 2 method 1");
+        for (row = 1; row <= 5; row++){
+            System.out.print(space);
+            for (col = 5; col >= row; col--)
+                System.out.print("*");
+            System.out.println();
+            space += " "; 
+        }
+        
+        System.out.println("Triangle 2 method 2");
+        count = 0;
+
+        for (row = 1; row <= 5; row++, count++){   
+            for (col = 1; col <= 5; col++){
+                if (col > count)
+                    System.out.print("*");
+                else
+                    System.out.print(" "); 
+            }
+            System.out.println(); 
+        }
+        
+        System.out.println("Triangle 3");
+        count = 5;
+        
+        for (row = 1; row <= 5; row++, count--){   
+            for (col = 1; col <= 5; col++){
+                if (col < count)
+                    System.out.print(" ");
+                else
+                    System.out.print("*");
+            }
+            System.out.println(); 
+        }
+      }
+    }
+
