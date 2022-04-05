@@ -13,8 +13,6 @@ Instead of using the loop variables i and j, notice how I use row and col to mak
 
     int row;
     int col;
-    int count = 5;
-    String space = "";
     
     System.out.println("Triangle 1 method 1");
     
