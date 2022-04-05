@@ -9,7 +9,7 @@ Now that you understand nested ‘for’  loops, we are going to make some star 
     **
     *
 
-Instead of using the loop variables i and j notice how I use row and column to make the code clearer.
+Instead of using the loop variables i and j, notice how I use row and col to make the code clearer.
 
     int row;
     int col;
@@ -40,7 +40,7 @@ Now try this pattern
       ***
      ****
     ***** 
-After google
+### After google
 
 I was surprised I could not find a solution to my particular patterns. I remember doing this problem years ago when I learned about nested ‘for’ loops and I swear my triangles were upside down to start. It was strange that the only example I could find online was the one pattern I did not ask for, which was the one with the base toward the lower part of the screen and the hypotenuse toward the right part of the screen. 
 
