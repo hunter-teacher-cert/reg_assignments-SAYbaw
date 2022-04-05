@@ -14,7 +14,7 @@ Instead of using the loop variables i and j, notice how I use row and col to mak
     int row;
     int col;
     
-    System.out.println("Triangle 1 method 1");
+    System.out.println("Triangle 1");
     
     for (row = 1; row <= 5; row++){
             for (col = 5; col >= row; col--)
