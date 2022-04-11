@@ -1,0 +1,25 @@
+BEGIN {
+	FS = ",";
+	count = 0
+}
+NR >= 2 && NR < 6 {
+	x[NR] = $2;
+	y[NR] = $18;
+	count++
+	
+ 	}
+END {
+	for(i = 1;i < count + 1;i++){
+		sumX = sumX + x[i];
+  		sumX2 = sumX2 + x[i]*x[i];
+  		sumY = sumY + y[i];
+  		sumXY = sumXY + x[i]*y[i]
+	}
+	b = (count * sumXY - sumX * sumY) / ( count * sumX2 - sumX * sumX);
+ 	a = (sumY - b*sumX) / count;
+	
+	for (i = 24; i < 27; i++){
+		pAvg = a + (b * i);
+		printf("Age %d: %.3f projected batting avg.\n",i, pAvg)
+	}
+} 
