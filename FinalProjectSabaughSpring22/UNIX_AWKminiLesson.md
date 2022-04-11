@@ -106,7 +106,7 @@ Then type [i] and the bottom of the screen will now say insert mode. We are now 
                     sumY = sumY + y[i];
                     sumXY = sumXY + x[i]*y[i]
             }
-            b = (count * sumXY - sumX * sumY) / ( count * sumX2 - sumX * 			sumX);
+            b = (count * sumXY - sumX * sumY) / ( count * sumX2 - sumX * sumX);
             a = (sumY - b*sumX) / count;
 
             for (i = 24; i < 27; i++){
