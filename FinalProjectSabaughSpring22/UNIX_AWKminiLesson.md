@@ -68,9 +68,9 @@ So first, we need to manipulate the data from those first 4 seasons. Now they're
 
 		/regular expression/ {action}
 
-As a slight diversion, I want to give another demonstration of UNIX pipes, small UNIX programs, and *regular expressions*, with a program called sort. Since our file is already sorted in order chronologically, we can sort our file in reverse by doing a pattern looking for all the lines that contain BOS the only team he ever played for, and piping that through sort with a reverse option. For this exercise, we’ll just look at Ted’s home runs, which is field 12, and the years he hit them field 1 in reverse order.
+As a slight diversion, I want to give another demonstration of UNIX pipes, small UNIX programs, and *regular expressions*, with a program called sort. Since our file is already sorted in order chronologically. We can sort our file by home runs in reverse starting with the most hit and the year to the least hit and the year by doing a pattern looking for all the lines that contain BOS, the only team he ever played for, and piping that through sort with a reverse option. For this exercise, we’ll just look at Ted’s home runs, which is field 12, and the years he hit them field 1 in reverse order. For fun, we can add another pipe to the speech program. On my Mac OSX version of UNIX, it is called say. The idea here is to show you that all UNIX programs are designed so that the output of one program can be input into another seamlessly.
 
-	awk 'BEGIN {FS = ","} /BOS/{print $12 " " $1}' ted.txt |sort -r
+	awk 'BEGIN {FS = ","} /BOS/{print $12 " " $1}' ted.txt |sort -r |say
 
 Now back to our model. We can search for a range of lines that begin with the integer 1939 and end at 1942 (inclusive). To prove that this pattern works we’ll print the lines first (NOTE: the comma between the two reg ex denotes a range). 
 
