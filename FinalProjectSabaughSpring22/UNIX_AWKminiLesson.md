@@ -123,7 +123,7 @@ An important thing to consider with arrays in AWK. Note how I populate the x[] a
 
 We also did all of our number-crunching in a special AWK pattern called END. This is where you program after all of your input file has been read into your program.
 
-If you are used to Java or other C languages, you may be thinking I erroneously omitted some semicolons [;] to terminate some statements. In AWK, semicolons [;] are used to divide multiple statements in an action block, NOT to terminate every line, like in Java or C languages. Think of AWK’s usage of the semicolon [;] in action block similar to how it is used in ‘for’ loop headers in Java and C [(initialization; loop conditional; update)] Notice in the ‘for loop we do not terminate the update section in the semicolon [;].
+If you are used to Java or other C languages, you may be thinking I erroneously omitted some semicolons [;] to terminate some statements. In AWK, semicolons [;] are used to divide multiple statements in an action block, NOT to terminate every line, like in Java or C languages. Think of AWK’s usage of the semicolon [;] in action block similar to how it is used in ‘for’ loop headers in Java and C [(initialization; loop conditional; update)] Notice in the ‘for' loop we do not terminate the update section in the semicolon [;].
  
 When finished, hit [esc] then [:x!] to save and exit VIM. Now we run the program from a file from the command line we just have to use this command.
 
