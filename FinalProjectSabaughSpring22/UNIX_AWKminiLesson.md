@@ -68,9 +68,9 @@ So first, we need to manipulate the data from those first 4 seasons. Now they're
 
 		/regular expression/ {action}
 
-As a slight diversion, I want to give another demonstration of UNIX pipes, small UNIX programs, and *regular expressions*, with a program called sort. Since our file is already sorted in order chronologically. We can sort our file by home runs in reverse starting with the most hit and the year to the least hit and the year by doing a pattern looking for all the lines that contain BOS, the only team he ever played for, and piping that through sort with a reverse option. For this exercise, we’ll just look at Ted’s home runs, which is field 12, and the years he hit them field 1 in reverse order. For fun, we can add another pipe to the speech program. On my Mac OSX version of UNIX, it is called say. The idea here is to show you that all UNIX programs are designed so that the output of one program can be input into another seamlessly.
-
-	awk 'BEGIN {FS = ","} /BOS/{print $12 " " $1}' ted.txt |sort -r |say
+As a slight diversion, I want to give another demonstration of UNIX pipes, small UNIX programs, and *regular expressions*, with a program called sort. Since our file is already sorted in order chronologically. We can sort our file by home runs in reverse starting with the most hit and the year to the least hit and the year by doing a pattern looking for all the lines that contain BOS, the only team he ever played for, and piping that through sort with a reverse option. For this exercise, we’ll just look at Ted’s home runs, which is field 12, and the years he hit them field 1 in reverse order. For fun, we can add another pipe to the speech program. On my Mac OSX version of UNIX, it is called say. The idea here is to show you that all UNIX programs are designed so that the output of one program can be input into another seamlessly. Instead of printing the results to the terminal screen, we can print the results to a new file called tedHRsorted.txt by using the [>] print to file operator followed by the file name in quotes, which can also be used in any AWK action block. So now we’ll have a text record of our new list and only the speech output.
+	
+		awk 'BEGIN {FS = ","} /BOS/{print $12 " " $1}' ted.txt |sort -r > "tedHRsorted.txt" |say 
 
 Now back to our model. We can search for a range of lines that begin with the integer 1939 and end at 1942 (inclusive). To prove that this pattern works we’ll print the lines first (NOTE: the comma between the two reg ex denotes a range). 
 
@@ -90,8 +90,8 @@ So far, all of our awk programs have been done “in-line” or on the command l
 Then type [i] and the bottom of the screen will now say insert mode. We are now ready to enter our program
 
     BEGIN {
-    		    FS = ",";
-        	  count = 0
+    	    FS = ",";
+	    count = 0	
     }
     NR >= 2 && NR < 6 {
             x[NR] = $2;
@@ -122,6 +122,8 @@ Notice that in the second ‘for’ loop I use “i” as my loop variable when 
 An important thing to consider with arrays in AWK. Note how I populate the x[] and y[] arrays in the BEGIN action statement. The array’s first subscript is the number 2, not 0 like most languages or 1 in BASIC or Visual Basic. That is because AWK uses associative arrays like dictionaries in Python or hash tables in JS or Java. A subscript could be essentially any data type (integer, float, string). This is a very powerful feature for creating quick databases and even creating your own programming language with AWK plus a whole lot of other useful programs but also is convenient for populating arrays with the NR variable and being able to skip the header.
 
 We also did all of our number-crunching in a special AWK pattern called END. This is where you program after all of your input file has been read into your program.
+
+If you are used to Java or other C languages, you may be thinking I erroneously omitted some semicolons [;] to terminate some statements. In AWK, semicolons [;] are used to divide multiple statements in an action block, NOT to terminate every line, like in Java or C languages. Think of AWK’s usage of the semicolon [;] in action block similar to how it is used in ‘for’ loop headers in Java and C [(initialization; loop conditional; update)] Notice in the ‘for loop we do not terminate the update section in the semicolon [;].
  
 When finished, hit [esc] then [:x!] to save and exit VIM. Now we run the program from a file from the command line we just have to use this command.
 
