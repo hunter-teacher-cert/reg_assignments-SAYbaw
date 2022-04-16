@@ -26,7 +26,7 @@ Now, that is a lot of data to sift through so let us take a look just at the hea
 
 		pattern { action } 
 
-Think of it like an ‘if statement’ without writing ‘if’ and parentheses () around the condition or in this case the pattern. The program will read the input file and “if” the current line in the file it is reading (NOTE: it is important to understand that AWK reads files line-by-line) matches the pattern, the action in curly brackets {} will be performed. So to print just the header, we use a built-in variable in AWK named NR that gives us the number of lines read.
+Think of it like an ‘if statement’ without writing ‘if’ and parentheses () around the condition or in this case the pattern. The program will read the input file and “if” the current line in the file it is reading matches the pattern, the action in curly brackets {} will be performed. So to print just the header, we use a built-in variable in AWK named NR that gives us the number of lines read.
 
 		awk 'NR == 1 {print}' ted.txt 
 
@@ -46,7 +46,7 @@ Now that we know we have 30 fields per line, it would be helpful to make a table
 
 		awk 'BEGIN {FS = ","} NR == 1 {for (i = 1;i < NF + 1;i++){ print $i " = " i "\n"}}' ted.txt
 
-Notice that the ‘for’ loop in AWK is the same as it is in JAVA and other C languages, and there is no need for a concatenation operator like in other languages. We can also save this table to a text file so we have it later for reference.
+Notice that the ‘for’ loop in AWK is the same as it is in JAVA and other C languages, and there is no need for a concatenation operator like in other languages in the print statement. We can also save this table to a text file so we have it later for reference.
 
 		awk 'BEGIN {FS = ","} NR == 1 {for (i = 1;i < NF + 1;i++){ print $i " = " i "\n" > "tedTable.txt"}}' ted.txt
 		
@@ -66,7 +66,7 @@ Now let's do some data analysis on Ted Williams. Ted Williams, it has been argue
 
 		awk 'BEGIN {FS = ","} NR > 1 && $18 > .3999{print $1 " " $18}' ted.txt
 
-De did it in 3 seasons. Did Ted Williams play full seasons those years? Let’s grab some more data. For .400 to be impressive you have to qualify for the batting title, meaning you have to play close to a full season. In his day a full season was 155 games, so a season with more than 100 games played would put Ted in contention for the batting title. We’ll also look at how old he was. To format these nicely, we’ll use a ‘printf()’ function, which is exactly the same as C or Java.
+He did it in 3 seasons. Did Ted Williams play full seasons those years? Let’s grab some more data. For .400 to be impressive you have to qualify for the batting title, meaning you have to play close to a full season. In his day a full season was 155 games, so a season with more than 100 games played would put Ted in contention for the batting title. We’ll also look at how old he was. To format these nicely, we’ll use a ‘printf()’ function, which is exactly the same as C or Java.
 
 		awk 'BEGIN {FS = ","} NR > 1 && $18 > .3999 {printf("%d %d %3d %.3f\n",$1, $2, $5, $18)}' ted.txt
 
