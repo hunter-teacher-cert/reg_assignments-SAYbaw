@@ -1,9 +1,15 @@
 # Building A Statistical Baseball Model with UNIX and AWK
 ### By Steve Sabaugh
 
-Outside of the UNIX kernel are several tiny programs. These programs are small due to the memory constraints of early computer systems. The UNIX philosophy was to make small, single-purpose programs that could be “stitched” together through pipelines. That is why this character “|” is called a pipe. For instance, there is a powerful calculator program called bc. It really is a language similar to C-like languages, and it comes in really handy if you want to use variables or control structures but don’t want to code up a program.  To use it, you escape the command line prompt, but if you want to do just a quick calculation you can just pipe an echo (echo is just a bash command for print) and pipe it through bc and you’ll get your answer back from bc to the command line prompt.
+Outside of the UNIX kernel are several tiny programs. These programs are small due to the memory constraints of early computer systems. The UNIX philosophy was to make small, single-purpose programs that could be “stitched” together through pipelines. That is why this character “|” is called a pipe. For instance, there is a powerful calculator program called bc. It really is a language similar to C-like languages, and it comes in really handy if you want to use variables or control structures but don’t want to "code up" a whole program.  To use it, you have to escape the command line prompt, but if you want to do just a quick calculation you can just pipe an echo (echo is just a bash command for print) and pipe it through bc and you’ll get your answer back from bc to the command line prompt.
 
-		echo 2^8 |bc
+		echo 2^8-1 |bc
+
+For fun, we can add another pipe to the speech program. On my Mac OSX version of UNIX, it is called say. The idea here is to show you that all UNIX programs are designed so that the output of one program can be input into another seamlessly. Instead of printing the results to the terminal screen, we can print the results to a new file called byte.txt by using this [>] operator followed by the file name in quotes. 
+
+		echo 2^8-1 |bc > "byte.txt" |say
+
+So now we’ll have a new file of the bit capacity of a byte for future reference and only the speech as our output. Notice this technique of modularization. UNIX was the first OS created by programmers for programmers who were starting to want more modularization and structure in their programming. The idea of code reuse and system libraries was very much influenced by the UNIX revolution. The idea of using smaller pieces to create bigger things.
 
 In our ‘awk’ folder we have our .txt file with Boston Red Sox’s Hall of Fame Left Fielder, Ted Williams’s lifetime stats. An easy way to look at this file is to use the command ‘cat,’ which is short for conCATenation. Cat is a “small program” that takes all the words in a text file and concatenates them (appends them one after) onto the terminal screen. In other words, it prints out the text file to the screen like thus.
 
@@ -38,15 +44,29 @@ Since there are many fields in our Ted Williams stats, we should count how many 
 
 Now that we know we have 30 fields per line, it would be helpful to make a table to number the header so we know what the field numbers are without having to squint our eyes and count on the screen. We can do this with a simple ‘for’ loop in our action block.
 
-		awk 'BEGIN {FS = ","} NR == 1 {for (i = 1;i < NF + 1;i++){ print $i, " = ", i, "\n"}}' ted.txt
+		awk 'BEGIN {FS = ","} NR == 1 {for (i = 1;i < NF + 1;i++){ print $i " = " i "\n"}}' ted.txt
 
-Notice that I used commas in the print statement. I used those only for readability. There is no concatenation operator per se in AWK like in other languages. Simply appending a variable or string literal one after another will concatenate the string. Also, the ‘for’ loop in AWK is the same as it is in JAVA and other C languages.
+Notice that the ‘for’ loop in AWK is the same as it is in JAVA and other C languages, and there is no need for a concatenation operator like in other languages. We can also save this table to a text file so we have it later for reference.
 
-Now let's do some data analysis on Ted Williams. Ted Williams, it has been argued, is the greatest left-handed hitter of all time. He was also the last hitter to hit .400 in a season. So let’s search for the season(s) he hit .400 and above. We’ll use our handy table we just printed to the screen to see that field 18 is BA or batting average. I will also print the year, field 1 followed by a blank space then the BA (notice this time I do not use commas).
+		awk 'BEGIN {FS = ","} NR == 1 {for (i = 1;i < NF + 1;i++){ print $i " = " i "\n" > "tedTable.txt"}}' ted.txt
+		
+		cat tedTable.txt
+		
+I want to give another handy example of UNIX pipes and a small UNIX program called sort. Since our file is already sorted in order chronologically. Let's look at just years and home runs fields 1 & 12. 
+
+		awk 'BEGIN {FS = ","} {print $1 "\t" $12}' ted.txt 
+		
+
+We can sort our file by home runs and in reverse starting with the most hit and the year to the least hit and the year by using sort with a reverse option.
+	
+		awk 'BEGIN {FS = ","}$1 >=1939 && $1 < 1961 || $1 == "Year" {print $12 "\t" $1}' ted.txt |sort -r
+
+
+Now let's do some data analysis on Ted Williams. Ted Williams, it has been argued, is the greatest left-handed hitter of all time. He was also the last hitter to hit .400 in a season. So let’s search for the season(s) he hit .400 and above. We’ll use our handy table we just printed to the screen to see that field 18 is BA or batting average. I will also print the year, field 1 followed by a blank space then the BA.
 
 		awk 'BEGIN {FS = ","} NR > 1 && $18 > .3999{print $1 " " $18}' ted.txt
 
-Oh wow, he did it in 3 seasons. The last two seasons are a bit odd if you know American history and anything about Ted William’s military career. 1952 & 1953 the US was in the thick of the Korean war. Did Ted Williams play full seasons those years? Let’s grab some more data. For .400 to be impressive you have to qualify for the batting title, meaning you have to play close to a full season. In his day a full season was 155 games, so a season with more than 100 games played would put Ted in contention for the batting title. We’ll also look at how old he was. To format these nicely, we’ll use a ‘printf()’ function, which is exactly the same as C or Java.
+De did it in 3 seasons. Did Ted Williams play full seasons those years? Let’s grab some more data. For .400 to be impressive you have to qualify for the batting title, meaning you have to play close to a full season. In his day a full season was 155 games, so a season with more than 100 games played would put Ted in contention for the batting title. We’ll also look at how old he was. To format these nicely, we’ll use a ‘printf()’ function, which is exactly the same as C or Java.
 
 		awk 'BEGIN {FS = ","} NR > 1 && $18 > .3999 {printf("%d %d %3d %.3f\n",$1, $2, $5, $18)}' ted.txt
 
@@ -62,32 +82,13 @@ Notice lines 6-8. Those lines read
 
 As you may have also learned in social studies class, WW2 was raging during 1942, 43, and 44. Baseball continued to be played as players came and went from military service or were disqualified from fighting.  One quality that Ted had that made him such a great hitter was superior eyesight. He could pick up the spin of the ball better than those with 20/20 vision. Thus, having more time to react if a ball would be in the strike zone or not. This superior vision made Ted an Ideal candidate as a pilot and he was in peak form for a fighter pilot at the age of 24. Unfortunately for baseball fans, he was also just reaching his peak form for playing baseball. Baseball writers and fans alike, from those who watched the “splendid splinter” play in person, as my dad did, or those who know him only from film, stats, and old box scores like myself, always debate and dream about what “could’ve been” if old “teddy ball game” didn’t miss those 3 years at his peak. Ted Williams is enshrined in Baseball’s Hall of Fame, so it is not like he’s cheated of any glory, just a world series title, but with AWK we can build a quick predictive model of “might’ve been.” 
 
-The simplest way to do this is to do a regression analysis. Linear regression is one of the first predictive modeling techniques used in machine learning and modeling. The technique we’ll use for brevity and speed is the least-squares method. So, in a nutshell, a regression analysis takes 2 variables (NOTE: I mean variables in the statistical sense of the word as in data points, not in the programming sense as in a named memory location whose value changes as the program runs) x and y. The x variable is our independent variable, and our y variable is our dependent variable or the one we want to predict or analyze. In other words, based on past x,y relationships, what can we predict y will be if x = n. In our model, our independent x variable will be Ted’s age and our dependent y variable will be his batting average. We will base our model on his previous 4 full seasons, where x and y (age and avg) are both known and we will write a program that will give us a formula for the best fit for a “curve” that is a straight line (thus the linear in “linear regression”) that would match his positive trajectory of batting average through his prime years with only his age or x as the known variable. This model cannot, therefore, predict slumps.
+The simplest way to do this is to do a regression analysis. Linear regression is one of the first predictive modeling techniques used in machine learning and modeling. The technique we’ll use for brevity and speed is the least-squares method. So, in a nutshell, a regression analysis takes 2 variables x and y (NOTE: I mean variables in the statistical sense of the word as in data points, not in the programming sense as in a named memory location whose value changes as the program runs). The x variable is our independent variable, and our y variable is our dependent variable or the one we want to predict or analyze. In other words, based on past x,y relationships, what can we predict y will be if x = n. In our model, our independent x variable will be Ted’s age and our dependent y variable will be his batting average. We will base our model on his previous 4 full seasons, where x and y (age and avg) are both known and we will write a program that will give us a formula for the best fit for a “curve” that is a straight line (thus the linear in “linear regression”) that would match his positive trajectory of batting average through his prime years with only his age or x as the known variable. This model cannot, therefore, predict slumps.
 
-So first, we need to manipulate the data from those first 4 seasons. Now they're a couple of ways to do that. There is a big concept in UNIX called *regular expressions*. This is a way to search for and manipulate strings as opposed to mathematical expressions thus the word regular. There are two programs in UNIX called grep and sed that use *regular expressions* to manipulate and search for data and AWK incorporates *regular expressions* in pattern matching. So instead of writing a conditional boolean statement, you can use a regular expression like thus.
-
-		/regular expression/ {action}
-
-As a slight diversion, I want to give another demonstration of UNIX pipes, small UNIX programs, and *regular expressions*, with a program called sort. Since our file is already sorted in order chronologically. We can sort our file by home runs in reverse starting with the most hit and the year to the least hit and the year by doing a pattern looking for all the lines that contain BOS, the only team he ever played for, and piping that through sort with a reverse option. For this exercise, we’ll just look at Ted’s home runs, which is field 12, and the years he hit them field 1 in reverse order. For fun, we can add another pipe to the speech program. On my Mac OSX version of UNIX, it is called say. The idea here is to show you that all UNIX programs are designed so that the output of one program can be input into another seamlessly. Instead of printing the results to the terminal screen, we can print the results to a new file called tedHRsorted.txt by using the [>] print to file operator followed by the file name in quotes, which can also be used in any AWK action block. So now we’ll have a text record of our new list and only the speech output.
-	
-		awk 'BEGIN {FS = ","} /BOS/{print $12 " " $1}' ted.txt |sort -r > "tedHRsorted.txt" |say 
-
-Now back to our model. We can search for a range of lines that begin with the integer 1939 and end at 1942 (inclusive). To prove that this pattern works we’ll print the lines first (NOTE: the comma between the two reg ex denotes a range). 
-
-		awk '/1939/, /1942/ {print NR " " $0}' ted.txt 
-
-
-However, since we have line numbers handy, we can also just use a traditional compound boolean statement with the built-in NR variable.
+So first, we need to manipulate the data from those first 4 seasons. Since we have line numbers handy, we can use a traditional compound boolean statement with the built-in NR variable.
 
 		awk 'NR >= 2 && NR < 6 {print NR " " $0}' ted.txt
 
-Same thing. Again, AWK is about speed and shortcuts or readability and ease. You decide which is better.
-
-So far, all of our awk programs have been done “in-line” or on the command line because they were very small. Our statistical model will still be a small program, but sometimes you might find it easier to write the program in a separate text file and you can write it out in a more traditional way you are used to writing programs in other languages that use curly braces {} like Java or the C languages. You could use any graphical text editor, but I would like to show you my favorite text editor that I use right from the command line, another UNIX tiny program that is called VIM. I’m going to open VIM and create a new file TedWarYears.txt.
-
-		vi TedWarYears.txt
-
-Then type [i] and the bottom of the screen will now say insert mode. We are now ready to enter our program
+So far, all of our awk programs have been done “in-line” or on the command line because they were very small. Our statistical model will still be a small program, but sometimes you might find it easier to write the program in a separate text file and you can write it out in a more traditional way you are used to writing programs in other languages that use curly braces {} like Java or the C languages. You could use any text editor and create a new file TedWarYears.txt.
 
     BEGIN {
     	    FS = ",";
@@ -125,7 +126,7 @@ We also did all of our number-crunching in a special AWK pattern called END. Thi
 
 If you are used to Java or other C languages, you may be thinking I erroneously omitted some semicolons [;] to terminate some statements. In AWK, semicolons [;] are used to divide multiple statements in an action block, NOT to terminate every line, like in Java or C languages. Think of AWK’s usage of the semicolon [;] in action block similar to how it is used in ‘for’ loop headers in Java and C [(initialization; loop conditional; update)] Notice in the ‘for' loop we do not terminate the update section in the semicolon [;].
  
-When finished, hit [esc] then [:x!] to save and exit VIM. Now we run the program from a file from the command line we just have to use this command.
+When finished, we run the program from a file from the command line we just have to use this command.
 
 		awk -f "filename.ext" inputfile.ext
 
