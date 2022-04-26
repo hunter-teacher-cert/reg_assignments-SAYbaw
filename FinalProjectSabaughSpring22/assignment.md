@@ -58,7 +58,7 @@ List our directory again to see if it is still there.
 
 	ls
 
-Now to go up one level in the file hierarchy type
+Now to go up one level in the file hierarchy, type
 
 	cd ..
 
@@ -70,7 +70,7 @@ You can open files from the command line too. Take a look at your screenshot. He
 
 	open GreenbergHank042522unix.png
 
-Your image preview program should open and you can see your work. Now close that preview program and get back to the command line. We do not need that directory named “gawk”. Let’s remove that with the remove directory command (NOTE: the following command only removes empty directories. Use rm -r ‘remove recursively’ to remove a folder and all its contents, however, use this with extreme caution.)
+Your image preview program should open and you can see your work. Now close that preview program and get back to your terminal. We do not need that directory named “gawk”. Let’s remove that with the remove directory command (NOTE: the following command only removes empty directories. Use rm -r ‘remove recursively’ option '-r' to remove a folder and all its contents, however, use this with extreme caution.)
 
 	rmdir gawk
 
@@ -82,7 +82,7 @@ Now one last command. If your terminal screen gets too crowded and you want to s
 
 	clear
 
-
+[instructions to add files to the "awk" directory for the mini-lesson/demo on the AWK programming language]
 
 
 		
