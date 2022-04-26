@@ -1,5 +1,6 @@
 # UNIX Lesson Assignment
-## Basic command line and file navigation self-guided lesson
+## Basic command line and file navigation self-guided lesson or
+## *Terminal Zen: Find Yourself with no GUI* 
 ### By Steve Sabaugh
 
 The following is by no means a full lesson in command-line navigation, but if you master these simple basics, I feel you will be able to get around and play in UNIX and Linux terminal environments with some confidence. Please, at first only type the commands listed here and nothing else. You will need to document your progress later. If you make mistakes that is ok, just retype and continue. Do not press enter repeatedly. This exercise should all fit on one terminal screen. After you’ve completed the assignment, practice until you have the commands memorized and down. Please be aware that I use the the term “folder” and “directory” interchangeably. The technical term in UNIX is “directory” but both terms mean the same thing.
