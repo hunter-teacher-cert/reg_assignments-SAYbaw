@@ -1,4 +1,4 @@
-# UNIX Lesson Assignment
+# UNIX Lesson Warm-up
 ## Basic command line and file navigation self-guided lesson or
 ## *Terminal Zen: Find Yourself with no GUI* 
 ### By Steve Sabaugh
