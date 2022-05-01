@@ -45,7 +45,7 @@ I want to give another handy example of UNIX pipes and a small UNIX program call
 
 We can sort our file by home runs and in reverse starting with the most hit and the year to the least hit and the year by using sort with a reverse option.
 	
-	awk 'BEGIN {FS = ","}$1 >=1939 && $1 < 1961 || $1 == "Year" {print $12 "\t" $1}' ted.txt |sort -r
+	awk 'BEGIN {FS = ","}$1 >= 1939 && $1 < 1961 || $1 == "Year" {print $12 "\t" $1}' ted.txt |sort -r
 
 
 Now let's do some data analysis on Ted Williams. Ted Williams, it has been argued, is the greatest left-handed hitter of all time. He was also the last hitter to hit .400 in a season. So let’s search for the season(s) he hit .400 and above. We’ll use our handy table we just printed to the screen to see that field 18 is BA or batting average. I will also print the year, field 1 followed by a blank space then the BA.
