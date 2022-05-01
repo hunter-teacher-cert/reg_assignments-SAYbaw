@@ -1,84 +1,70 @@
 # Building A Statistical Baseball Model with UNIX and AWK
 ### By Steve Sabaugh
 
-Outside of the UNIX kernel are several tiny programs. These programs are small due to the memory constraints of early computer systems. The UNIX philosophy was to make small, single-purpose programs that could be “stitched” together through pipelines. That is why this character “|” is called a pipe. For instance, there is a powerful calculator program called bc. It really is a language similar to C-like languages, and it comes in really handy if you want to use variables or control structures but don’t want to "code up" a whole program.  To use it, you have to escape the command line prompt, but if you want to do just a quick calculation you can just pipe an echo (echo is just a bash command for print) and pipe it through bc and you’ll get your answer back from bc to the command line prompt.
+Outside of the UNIX kernel are several tiny programs and utilities. There is also a programming language native to UNIX called AWK. AWK comes standard with UNIX and Unix-like operating systems like Linux. AWK is a data-driven language especially useful for data extraction, report making, and “one-liners” or very short programs. Also, as we will see later on it can be a very powerful data analytics tool. Its syntax is very similar to C and C-like languages like Java, so it is very easy to learn if you know one of them, or it is worth learning if you want to learn those languages. It also has very practical applications for office jobs. You can automate a lot of very boring and repetitive tasks, and extract pertinent data from very large files quickly. File handling in other programming languages is trickier because you have to handle file error and memory exceptions but AWK has none of those.  AWK interfaces directly with the OS and not an interpreter so it is much faster than Python which makes a huge difference with big files. AWK gets its name from the last names of its 3 creators at Bell laboratories, the same place that developed the UNIX operating system and the C language, not to mention the countless other critical developments in computer science and our everyday lives; Alfred Aho, Peter Weinberger, and Brian Kernighan. Aho just received the 2020 Turing Award for his contributions to the field of Computer science and Brian Kernighan literally wrote the book on C.  To use it, you have to escape the command line prompt, but if you want to do just a quick calculation you can just pipe an echo (echo is just a bash command for print) and pipe it through bc and you’ll get your answer back from bc to the command line prompt.
 
-		echo 2^8-1 |bc
+In our ‘awk’ folder we have our .txt file with Boston Red Sox’s Hall of Fame Left Fielder, Ted Williams’s lifetime stats. We can look at the file with a short AWK program from the command line prompt. First, we invoke awk in the command line, then type our AWK program code enclosed in single quotes [‘’] followed by the input file that our AWK program will process, in this case, ted.txt.
 
-For fun, we can add another pipe to the speech program. On my Mac OSX version of UNIX, it is called say. The idea here is to show you that all UNIX programs are designed so that the output of one program can be input into another seamlessly. Instead of printing the results to the terminal screen, we can print the results to a new file called byte.txt by using this [>] operator followed by the file name in quotes. 
-
-		echo 2^8-1 |bc > "byte.txt" |say
-
-So now we’ll have a new file of the bit capacity of a byte for future reference and only the speech as our output. Notice this technique of modularization. UNIX was the first OS created by programmers for programmers who were starting to want more modularization and structure in their programming. The idea of code reuse and system libraries was very much influenced by the UNIX revolution. The idea of using smaller pieces to create bigger things.
-
-In our ‘awk’ folder we have our .txt file with Boston Red Sox’s Hall of Fame Left Fielder, Ted Williams’s lifetime stats. An easy way to look at this file is to use the command ‘cat,’ which is short for conCATenation. Cat is a “small program” that takes all the words in a text file and concatenates them (appends them one after) onto the terminal screen. In other words, it prints out the text file to the screen like thus.
-
-		cat ted.txt 
+	awk '{print $0}' ted.txt
 
 
-We can do the same thing with a short AWK program from the command line prompt. First, we invoke awk in the command line, then type our AWK program code enclosed in single quotes [‘’] followed by the input file that our AWK program will process, in this case, ted.txt.
+AWK is made up of pattern-action statements.
 
-		awk '{print $0}' ted.txt
+	pattern { action } 
 
-This AWK program did the same as the ‘cat’ command earlier.
+Think of it like an ‘if statement’ without writing ‘if’ and parentheses () around the condition or in this case the pattern. The program will read the input file and “if” the current line in the file it is reading (NOTE: it is important to understand that AWK reads files line-by-line) matches the pattern, the action in curly brackets {} will be performed. Now, that is a lot of data to sift through so let us take a look just at the header. We will use a built-in variable in AWK named NR that gives us the number of lines read.
 
-Now, that is a lot of data to sift through so let us take a look just at the header. AWK is made up of pattern-action statements.
-
-		pattern { action } 
-
-Think of it like an ‘if statement’ without writing ‘if’ and parentheses () around the condition or in this case the pattern. The program will read the input file and “if” the current line in the file it is reading matches the pattern, the action in curly brackets {} will be performed. So to print just the header, we use a built-in variable in AWK named NR that gives us the number of lines read.
-
-		awk 'NR == 1 {print}' ted.txt 
+	awk 'NR == 1 {print}' ted.txt 
 
 Now you saw before I put $0 and this time I just used print. Anything after a $ is a field number and $0 is all the fields in a line, however, if you omit $0 AWK will assume you want to print the whole line. To print the second line we just compare NR equality to 2. We can also omit the action statement altogether and AWK will assume we want to print the whole line.
 		
-		awk 'NR == 2' ted.txt 
+	awk 'NR == 2' ted.txt 
 
 The file ted.txt has its fields separated by commas. By default, AWK separates fields by white space. To change the field separator to a comma we change the built-in variable FS. We do this by using a special pattern called BEGIN. In other words, “if you’re at the beginning of the file, change the field separator to a comma.”
 
-		BEGIN {FS = ","}
+	BEGIN {FS = ","}
 
 Since there are many fields in our Ted Williams stats, we should count how many fields each line has. I will use another built-in AWK variable NF and print that variable's value to the screen after line 1 has been read.
 
-		awk 'BEGIN {FS = ","} NR == 1 {print NF}' ted.txt
+	awk 'BEGIN {FS = ","} NR == 1 {print NF}' ted.txt
 
 Now that we know we have 30 fields per line, it would be helpful to make a table to number the header so we know what the field numbers are without having to squint our eyes and count on the screen. We can do this with a simple ‘for’ loop in our action block.
 
-		awk 'BEGIN {FS = ","} NR == 1 {for (i = 1;i < NF + 1;i++){ print $i " = " i "\n"}}' ted.txt
+	awk 'BEGIN {FS = ","} NR == 1 {for (i = 1;i < NF + 1;i++){ print $i " = " i "\n"}}' ted.txt
 
 Notice that the ‘for’ loop in AWK is the same as it is in JAVA and other C languages, and there is no need for a concatenation operator like in other languages in the print statement. We can also save this table to a text file so we have it later for reference.
 
-		awk 'BEGIN {FS = ","} NR == 1 {for (i = 1;i < NF + 1;i++){ print $i " = " i "\n" > "tedTable.txt"}}' ted.txt
+	awk 'BEGIN {FS = ","} NR == 1 {for (i = 1;i < NF + 1;i++){ print $i " = " i "\n" > "tedTable.txt"}}' ted.txt
 		
-		cat tedTable.txt
+	cat tedTable.txt
 		
 I want to give another handy example of UNIX pipes and a small UNIX program called sort. Since our file is already sorted in order chronologically. Let's look at just years and home runs fields 1 & 12. 
 
-		awk 'BEGIN {FS = ","} {print $1 "\t" $12}' ted.txt 
+	awk 'BEGIN {FS = ","} {print $1 "\t" $12}' ted.txt 
 		
 
 We can sort our file by home runs and in reverse starting with the most hit and the year to the least hit and the year by using sort with a reverse option.
 	
-		awk 'BEGIN {FS = ","}$1 >=1939 && $1 < 1961 || $1 == "Year" {print $12 "\t" $1}' ted.txt |sort -r
+	awk 'BEGIN {FS = ","}$1 >=1939 && $1 < 1961 || $1 == "Year" {print $12 "\t" $1}' ted.txt |sort -r
 
 
 Now let's do some data analysis on Ted Williams. Ted Williams, it has been argued, is the greatest left-handed hitter of all time. He was also the last hitter to hit .400 in a season. So let’s search for the season(s) he hit .400 and above. We’ll use our handy table we just printed to the screen to see that field 18 is BA or batting average. I will also print the year, field 1 followed by a blank space then the BA.
 
-		awk 'BEGIN {FS = ","} NR > 1 && $18 > .3999{print $1 " " $18}' ted.txt
+	awk 'BEGIN {FS = ","} NR > 1 && $18 > .3999{print $1 " " $18}' ted.txt
 
 He did it in 3 seasons. Did Ted Williams play full seasons those years? Let’s grab some more data. For .400 to be impressive you have to qualify for the batting title, meaning you have to play close to a full season. In his day a full season was 155 games, so a season with more than 100 games played would put Ted in contention for the batting title. We’ll also look at how old he was. To format these nicely, we’ll use a ‘printf()’ function, which is exactly the same as C or Java.
 
-		awk 'BEGIN {FS = ","} NR > 1 && $18 > .3999 {printf("%d %d %3d %.3f\n",$1, $2, $5, $18)}' ted.txt
+	awk 'BEGIN {FS = ","} NR > 1 && $18 > .3999 {printf("%d %d %3d %.3f\n",$1, $2, $5, $18)}' ted.txt
 
 We see that in 1952 and 53 Ted only played in a few games. That is because Ted was fighting in the Korean War, which you probably learned about from social studies class. In 1941 he legitimately hit .406 on the season and won the batting title making him the last player to hit .400 or more in a season. Ted was in the Marine Corps as a Fighter Pilot. Despite being an all-star ballplayer, he was not in Korea as a goodwill ambassador. He saw real combat. In fact, his wingman was John Glenn, who would go on to be the first American to orbit the earth on Mercury 6 in 1962. He was too valuable of a pilot not to fight in Korea because he had many years of experience in America’s previous conflict, WW2. 
 
 We’re going to use that built-in variable again NR to give us a handy reference of numbered lines in our data set. Let’s take another look at Ted’s stats.
 
-		awk '{print NR " " $0}' ted.txt 
+	awk '{print NR " " $0}' ted.txt 
 
 Notice lines 6-8. Those lines read
 
-		Did not play in major or minor leagues (Military Service)
+	Did not play in major or minor leagues (Military Service)
 
 As you may have also learned in social studies class, WW2 was raging during 1942, 43, and 44. Baseball continued to be played as players came and went from military service or were disqualified from fighting.  One quality that Ted had that made him such a great hitter was superior eyesight. He could pick up the spin of the ball better than those with 20/20 vision. Thus, having more time to react if a ball would be in the strike zone or not. This superior vision made Ted an Ideal candidate as a pilot and he was in peak form for a fighter pilot at the age of 24. Unfortunately for baseball fans, he was also just reaching his peak form for playing baseball. Baseball writers and fans alike, from those who watched the “splendid splinter” play in person, as my dad did, or those who know him only from film, stats, and old box scores like myself, always debate and dream about what “could’ve been” if old “teddy ball game” didn’t miss those 3 years at his peak. Ted Williams is enshrined in Baseball’s Hall of Fame, so it is not like he’s cheated of any glory, just a world series title, but with AWK we can build a quick predictive model of “might’ve been.” 
 
@@ -86,35 +72,35 @@ The simplest way to do this is to do a regression analysis. Linear regression is
 
 So first, we need to manipulate the data from those first 4 seasons. Since we have line numbers handy, we can use a traditional compound boolean statement with the built-in NR variable.
 
-		awk 'NR >= 2 && NR < 6 {print NR " " $0}' ted.txt
+	awk 'NR >= 2 && NR < 6 {print NR " " $0}' ted.txt
 
 So far, all of our awk programs have been done “in-line” or on the command line because they were very small. Our statistical model will still be a small program, but sometimes you might find it easier to write the program in a separate text file and you can write it out in a more traditional way you are used to writing programs in other languages that use curly braces {} like Java or the C languages. You could use any text editor and create a new file TedWarYears.txt.
 
-    BEGIN {
-    	    FS = ",";
-	    count = 0	
-    }
-    NR >= 2 && NR < 6 {
-            x[NR] = $2;
-            y[NR] = $18;
-            count++
-
-    }
-    END{
-            for(i = 1;i < count + 1;i++){
-                    sumX = sumX + x[i];
-                    sumX2 = sumX2 + x[i]*x[i];
-                    sumY = sumY + y[i];
-                    sumXY = sumXY + x[i]*y[i]
-            }
-            b = (count * sumXY - sumX * sumY) / ( count * sumX2 - sumX * sumX);
-            a = (sumY - b*sumX) / count;
-
-            for (i = 24; i < 27; i++){
-                    pAvg = a + (b * i);
-                    printf("Age %d: %.3f projected batting avg.\n",i, pAvg)
-            }
-    }
+	BEGIN {
+		FS = ",";	#field seperator
+		count = 0	#toal number of previous seasons (to avoid using magic numbers)
+	}
+	NR >= 2 && NR < 6 {	#populating arrays of 1939-1941 seasons
+		x[NR] = $2;	#age array
+		y[NR] = $18;	#batting average array
+		count++
+	
+ 	}
+	END {
+		for(i = 1;i < count + 1;i++){	#we loop through our arrays to get sums and sums of
+		sumX = sumX + x[i];		#products to produce linear regression formula
+  		sumX2 = sumX2 + x[i]*x[i];
+  		sumY = sumY + y[i];
+  		sumXY = sumXY + x[i]*y[i]
+		}
+		b = (count * sumXY - sumX * sumY) / ( count * sumX2 - sumX * sumX);
+ 		a = (sumY - b*sumX) / count;	#this is our linear regression formula
+	
+		for (i = 24; i < 27; i++){	#here we use our formula to predict ages 24-27 batting avg
+		pAvg = a + (b * i);
+		printf("Age %d: %.3f projected batting avg.\n",i, pAvg)
+		}
+	} 
 
 Notice in the BEGIN action I created a count variable. This was used to avoid using magic numbers. AWK is designed for doing “quick and dirty” number crunching and data analysis or creating small useful programs on the fly. Popular conventions and norms are not usually necessary because AWK is not meant for building enterprise-level solutions. However, due to the didactic nature of this exercise, I thought it was important to create a variable to “count” how many records I was counting. If I wrote this program for myself, I would have put 5 instead of count + 1 in my first ‘for’ loop header, and when solving for “a” I would’ve divided by 4, etc., but old habits are hard to break.
 
