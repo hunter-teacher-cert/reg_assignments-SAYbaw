@@ -1,0 +1,25 @@
+BEGIN {
+	FS = ",";	#field seperator
+	count = 0	#toal number of previous seasons (to avoid using magic numbers)
+}
+NR >= 2 && NR < 6 {	#populating arrays of 1939-1941 seasons
+	x[NR] = $2;	#age array
+	y[NR] = $18;	#batting average array
+	count++
+	
+ 	}
+END {
+	for(i = 1;i < count + 1;i++){	#we loop through our arrays to get sums and sums of
+		sumX = sumX + x[i];	#products to produce linear regression formula
+  		sumX2 = sumX2 + x[i]*x[i];
+  		sumY = sumY + y[i];
+  		sumXY = sumXY + x[i]*y[i]
+	}				#solving for a and b in our formula
+	b = (count * sumXY - sumX * sumY) / ( count * sumX2 - sumX * sumX);
+ 	a = (sumY - b*sumX) / count;	
+	
+	for (i = 24; i < 27; i++){	#here we use our formula to predict ages 24-27 batting avg
+		pAvg = a + (b * i);	#this is our linear regression formula with i as our "x" variable
+		printf("Age %d: %.3f projected batting avg.\n",i, pAvg)
+	}
+} 
