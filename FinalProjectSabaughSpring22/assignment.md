@@ -1,10 +1,11 @@
 # UNIX AWK ASSIGNMENT
 
-You and your elbow-mate will each receive one of four possible population data sets; Brooklyn's (BKLNpop.txt), New York City’s (NYCpop.txt), and New York State’s (NYSpop.txt), or The United State’s populations from 1900 to 2020. You will write and run an awk program to predict the populations from your data set for 2030, 2040, and 2050 censuses. You will use the code from tedWarYears.txt as a guide. The data sets you are given are not separated by commas, so you will not need
+You and your elbow-mate will each receive one of four possible population data sets; Brooklyn's (BKLNpop.txt), New York City’s (NYCpop.txt), and New York State’s (NYSpop.txt), or The United State’s populations from 1900 to 2020. You will write and run an awk program to predict the populations from your data set for 2030, 2040, and 2050 censuses. You will use the code from tedWarYears.txt as a guide. The data sets you are given are not separated by commas, so you will NOT need
 
 	{FS = “,”}
 
-AWK defaults to blank spaces as field separators. When you are done writing your awk script in a text file, you will run it from the command line with this format
+AWK defaults to blank spaces as field separators. Another hint, remember when you use your ‘for’ loop to make your predictions at the end, is that you are not predicting consecutive years but stepping by 10s, so your update section cannot be i++. When you are done writing your awk script in a text file, you will run it from the command line with this format
+
 
 	awk -f "filename.txt" inputfile.txt
 
