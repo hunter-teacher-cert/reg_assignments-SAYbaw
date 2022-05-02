@@ -1,0 +1,13 @@
+awk '{print $0}' ted.txt
+awk 'NR == 1 {print}' ted.txt 
+awk 'NR == 2' ted.txt 
+awk 'BEGIN {FS = ","} NR == 1 {print NF}' ted.txt
+awk 'BEGIN {FS = ","} NR == 1 {for (i = 1;i < NF + 1;i++){ print $i, " = ", i, "\n"}}' ted.txt
+awk 'BEGIN {FS = ","} NR == 1 {for (i = 1;i < NF + 1;i++){ print $i " = " i "\n" > "tedTable.txt"}}' ted.txt
+cat tedTable.txt
+awk 'BEGIN {FS = ","}$1 >=1939 && $1 < 1961 || $1 == "Year" {print $12 "\t" $1}' ted.txt |sort -r
+awk 'BEGIN {FS = ","} NR > 1 && $18 > .3999{print $1 " " $18}' ted.txt
+awk 'BEGIN {FS = ","} NR > 1 && $18 > .3999 {printf("%d %d %3d %.3f\n",$1, $2, $5, $18)}' ted.txt
+awk '{print NR " " $0}' ted.txt 
+awk 'NR >= 2 && NR < 6 {print NR " " $0}' ted.txt
+awk -f "TedWarYears.txt" ted.txt
