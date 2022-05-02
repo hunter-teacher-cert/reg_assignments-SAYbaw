@@ -74,7 +74,11 @@ So first, we need to manipulate the data from those first 4 seasons. Since we ha
 
 	awk 'NR >= 2 && NR < 6 {print NR " " $0}' ted.txt
 
-So far, all of our awk programs have been done “in-line” or on the command line because they were very small. Our statistical model will still be a small program, but sometimes you might find it easier to write the program in a separate text file and you can write it out in a more traditional way you are used to writing programs in other languages that use curly braces {} like Java or the C languages. You could use any text editor and create a new file TedWarYears.txt.
+The linear regression formula is
+
+	Y = a + bX
+
+Here is how we will solve that formula, the use that formula for our predictive model. So far, all of our awk programs have been done “in-line” or on the command line because they were very small. Our statistical model will still be a small program, but sometimes you might find it easier to write the program in a separate text file and you can write it out in a more traditional way you are used to writing programs in other languages that use curly braces {} like Java or the C languages. You could use any text editor and create a new file TedWarYears.txt.
 
 	BEGIN {
 		FS = ",";	#field seperator
@@ -92,12 +96,12 @@ So far, all of our awk programs have been done “in-line” or on the command l
   		sumX2 = sumX2 + x[i]*x[i];
   		sumY = sumY + y[i];
   		sumXY = sumXY + x[i]*y[i]
-		}
+		}				#solving for a and b in our formula
 		b = (count * sumXY - sumX * sumY) / ( count * sumX2 - sumX * sumX);
- 		a = (sumY - b*sumX) / count;	#this is our linear regression formula
+ 		a = (sumY - b*sumX) / count;	
 	
 		for (i = 24; i < 27; i++){	#here we use our formula to predict ages 24-27 batting avg
-		pAvg = a + (b * i);
+		pAvg = a + (b * i);		#this is our linear regression formula with i as our "x" variable
 		printf("Age %d: %.3f projected batting avg.\n",i, pAvg)
 		}
 	} 
@@ -114,11 +118,11 @@ If you are used to Java or other C languages, you may be thinking I erroneously 
  
 When finished, we run the program from a file from the command line we just have to use this command.
 
-		awk -f "filename.ext" inputfile.ext
+	awk -f "filename.ext" inputfile.ext
 
 Now to see what our model predicts Ted Williams would have hit in his ages 24, 25 & 26 seasons if he had not gone and fought in WW2 and did not slump.
 
 		
-		 awk -f "TedWarYears.txt" ted.txt
+	awk -f "TedWarYears.txt" ted.txt
 
 There you have it. The debate and speculation are settled. If you are familiar at all with baseball statistics you may be able to tell that our model is a bit generous to the old “splendid splinter.” Die-hard fans of his, like my father, would say “yeah, that’s about right.” Teddy “Ballgame’s” legend is alive in me mostly because of hearing stories from my dad. Korean war era veterans like himself thought he was the greatest. Fresh from the air over the heat of the battle on the Korean peninsula, Ted came back from the war and finished the season by batting over .400 as if he never left. Now adding some weights and different regression methods would bring those numbers down to earth a little bit, especially those last two years, which seem impossible, but then again maybe our model is perfect because it just confirms the legend. This was a fun exercise, but this is exactly what you would do if your boss would ask you to predict sales agents on the floor to potential sales or cops on street to crimes committed.
