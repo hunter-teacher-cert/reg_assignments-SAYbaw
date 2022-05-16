@@ -1,6 +1,6 @@
 BEGIN {
 	FS = ",";	#field seperator
-	count = 0	#toal number of previous seasons (to avoid using magic numbers)
+	count = 0	#total number of previous seasons (to avoid using magic numbers)
 }
 NR >= 2 && NR < 6 {	#populating arrays of 1939-1941 seasons
 	x[NR] = $2;	#age array
