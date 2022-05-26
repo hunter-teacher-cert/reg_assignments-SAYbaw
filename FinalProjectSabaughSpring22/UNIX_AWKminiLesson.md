@@ -6,7 +6,7 @@ Outside of the UNIX kernel are several tiny programs and utilities. There is als
 In our ‘awk’ folder we have our .txt file with Boston Red Sox’s Hall of Fame Left Fielder, Ted Williams’s lifetime stats. We can look at the file with a short AWK program from the command line prompt. First, we invoke awk in the command line, then type our AWK program code enclosed in single quotes [‘’] followed by the input file that our AWK program will process, in this case, ted.txt.
 
 	awk '{print $0}' ted.txt
-[output](https://youtu.be/AUMKGDm45eY)
+[demo](https://youtu.be/AUMKGDm45eY)
 
 
 AWK is made up of pattern-action statements.
@@ -16,11 +16,12 @@ AWK is made up of pattern-action statements.
 Think of it like an ‘if statement’ without writing ‘if’ and parentheses () around the condition or in this case the pattern. The program will read the input file and “if” the current line in the file it is reading (NOTE: it is important to understand that AWK reads files line-by-line) matches the pattern, the action in curly brackets {} will be performed. Now, that is a lot of data to sift through so let us take a look just at the header. We will use a built-in variable in AWK named NR that gives us the number of lines read.
 
 	awk 'NR == 1 {print}' ted.txt
-[output](https://youtu.be/FVSp3UWXFUw)
+[demo](https://youtu.be/FVSp3UWXFUw)
 
 Now you saw before I put $0 and this time I just used print. Anything after a $ is a field number and $0 is all the fields in a line, however, if you omit $0 AWK will assume you want to print the whole line. To print the second line we just compare NR equality to 2. We can also omit the action statement altogether and AWK will assume we want to print the whole line.
 		
 	awk 'NR == 2' ted.txt 
+[demo](https://youtu.be/GQ6Fj5ZWTPk)
 
 The file ted.txt has its fields separated by commas. By default, AWK separates fields by white space. To change the field separator to a comma we change the built-in variable FS. We do this by using a special pattern called BEGIN. In other words, “if you’re at the beginning of the file, change the field separator to a comma.”
 
