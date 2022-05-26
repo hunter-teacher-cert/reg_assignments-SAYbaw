@@ -30,6 +30,7 @@ The file ted.txt has its fields separated by commas. By default, AWK separates f
 Since there are many fields in our Ted Williams stats, we should count how many fields each line has. I will use another built-in AWK variable NF and print that variable's value to the screen after line 1 has been read.
 
 	awk 'BEGIN {FS = ","} NR == 1 {print NF}' ted.txt
+[demo](https://youtu.be/R-8MYP7eKiE)
 
 Now that we know we have 30 fields per line, it would be helpful to make a table to number the header so we know what the field numbers are without having to squint our eyes and count on the screen. We can do this with a simple ‘for’ loop in our action block.
 
