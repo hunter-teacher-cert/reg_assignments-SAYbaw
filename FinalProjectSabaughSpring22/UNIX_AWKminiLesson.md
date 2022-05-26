@@ -44,12 +44,12 @@ Notice that the ‘for’ loop in AWK is the same as it is in JAVA and other C l
 	cat tedTable.txt
 [demo](https://youtu.be/LzjjRxr4ZPE)
 		
-I want to give another handy example of UNIX pipes and a small UNIX program called sort. Since our file is already sorted in order chronologically. Let's look at just years and home runs fields 1 & 12. 
+I want to give an example of UNIX pipes '|' and a small UNIX program called sort. Since our file is already sorted in order chronologically. Let's look at just years and home runs fields 1 & 12. 
 
 	awk 'BEGIN {FS = ","} {print $1 "\t" $12}' ted.txt 
 		
 
-We can sort our file by home runs and in reverse starting with the most hit and the year to the least hit and the year by using sort with a reverse option.
+We can "pipe|" our AWK program through sort in UNIX, sorting our file by home runs and in reverse starting with the most hit and the year to the least hit and the year by using sort with a reverse option.
 	
 	awk 'BEGIN {FS = ","}$1 >= 1939 && $1 < 1961 || $1 == "Year" {print $12 "\t" $1}' ted.txt |sort -r
 
