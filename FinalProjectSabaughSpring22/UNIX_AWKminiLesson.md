@@ -46,17 +46,19 @@ Notice that the ‘for’ loop in AWK is the same as it is in JAVA and other C l
 		
 I want to give an example of UNIX pipes '|' and a small UNIX program called sort. Since our file is already sorted in order chronologically. Let's look at just years and home runs fields 1 & 12. 
 
-	awk 'BEGIN {FS = ","} {print $1 "\t" $12}' ted.txt 
+	awk 'BEGIN {FS = ","} {print $1 "\t" $12}' ted.txt
 		
 
 We can "pipe|" our AWK program through sort in UNIX, sorting our file by home runs and in reverse starting with the most hit and the year to the least hit and the year by using sort with a reverse option.
 	
 	awk 'BEGIN {FS = ","}$1 >= 1939 && $1 < 1961 || $1 == "Year" {print $12 "\t" $1}' ted.txt |sort -r
+[demo](https://youtu.be/UDb5b7-EKXQ)
 
 
 Now let's do some data analysis on Ted Williams. Ted Williams, it has been argued, is the greatest left-handed hitter of all time. He was also the last hitter to hit .400 in a season. So let’s search for the season(s) he hit .400 and above. We’ll use our handy table we just printed to the screen to see that field 18 is BA or batting average. I will also print the year, field 1 followed by a blank space then the BA.
 
 	awk 'BEGIN {FS = ","} NR > 1 && $18 > .3999{print $1 " " $18}' ted.txt
+[demo](https://youtu.be/Tab3bI7h9tQ)
 
 He did it in 3 seasons. Did Ted Williams play full seasons those years? Let’s grab some more data. For .400 to be impressive you have to qualify for the batting title, meaning you have to play close to a full season. In his day a full season was 155 games, so a season with more than 100 games played would put Ted in contention for the batting title. We’ll also look at how old he was. To format these nicely, we’ll use a ‘printf()’ function, which is exactly the same as C or Java.
 
