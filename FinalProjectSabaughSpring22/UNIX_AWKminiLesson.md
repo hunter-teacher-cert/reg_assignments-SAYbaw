@@ -35,12 +35,14 @@ Since there are many fields in our Ted Williams stats, we should count how many 
 Now that we know we have 30 fields per line, it would be helpful to make a table to number the header so we know what the field numbers are without having to squint our eyes and count on the screen. We can do this with a simple ‘for’ loop in our action block.
 
 	awk 'BEGIN {FS = ","} NR == 1 {for (i = 1;i < NF + 1;i++){ print $i " = " i "\n"}}' ted.txt
+[demo](https://youtu.be/mlQVaUGgeP8)
 
 Notice that the ‘for’ loop in AWK is the same as it is in JAVA and other C languages, and there is no need for a concatenation operator like in other languages in the print statement. We can also save this table to a text file so we have it later for reference.
 
 	awk 'BEGIN {FS = ","} NR == 1 {for (i = 1;i < NF + 1;i++){ print $i " = " i "\n" > "tedTable.txt"}}' ted.txt
 		
 	cat tedTable.txt
+[demo](https://youtu.be/LzjjRxr4ZPE)
 		
 I want to give another handy example of UNIX pipes and a small UNIX program called sort. Since our file is already sorted in order chronologically. Let's look at just years and home runs fields 1 & 12. 
 
