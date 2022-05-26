@@ -7,7 +7,7 @@ In our ‘awk’ folder we have our .txt file with Boston Red Sox’s Hall of Fa
 
 	awk '{print $0}' ted.txt
 	
-	[output (https://youtu.be/AUMKGDm45eY)]
+[output](https://youtu.be/AUMKGDm45eY)
 
 
 AWK is made up of pattern-action statements.
