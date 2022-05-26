@@ -6,6 +6,8 @@ Outside of the UNIX kernel are several tiny programs and utilities. There is als
 In our ‘awk’ folder we have our .txt file with Boston Red Sox’s Hall of Fame Left Fielder, Ted Williams’s lifetime stats. We can look at the file with a short AWK program from the command line prompt. First, we invoke awk in the command line, then type our AWK program code enclosed in single quotes [‘’] followed by the input file that our AWK program will process, in this case, ted.txt.
 
 	awk '{print $0}' ted.txt
+	
+	[output](https://youtu.be/AUMKGDm45eY)
 
 
 AWK is made up of pattern-action statements.
