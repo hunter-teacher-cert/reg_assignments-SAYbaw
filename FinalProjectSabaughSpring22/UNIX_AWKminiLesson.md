@@ -6,7 +6,7 @@ Outside of the UNIX kernel are several tiny programs and utilities. There is als
 In our ‘awk’ folder we have our .txt file with Boston Red Sox’s Hall of Fame Left Fielder, Ted Williams’s lifetime stats. We can look at the file with a short AWK program from the command line prompt. First, we invoke awk in the command line, then type our AWK program code enclosed in single quotes [‘’] followed by the input file that our AWK program will process, in this case, ted.txt.
 
 	awk '{print $0}' ted.txt
-[demo](https://youtu.be/AUMKGDm45eY)
+[demo](https://youtu.be/AUMKGDm45eY) [output](https://github.com/hunter-teacher-cert/reg_assignments-SAYbaw/blob/main/FinalProjectSabaughSpring22/Screenshots/awk_1.png)
 
 
 AWK is made up of pattern-action statements.
@@ -18,10 +18,10 @@ Think of it like an ‘if statement’ without writing ‘if’ and parentheses 
 	awk 'NR == 1 {print}' ted.txt
 [demo](https://youtu.be/FVSp3UWXFUw)
 
-Now you saw before I put $0 and this time I just used print. Anything after a $ is a field number and $0 is all the fields in a line, however, if you omit $0 AWK will assume you want to print the whole line. To print the second line we just compare NR equality to 2. We can also omit the action statement altogether and AWK will assume we want to print the whole line.
+Now you saw before I put "$0" and this time I just used "print." Anything after a $ is a field number and $0 is all the fields in a line, however, if you omit $0 AWK will assume you want to print the whole line. To print the second line we just compare NR equality to 2. We can also omit the action statement altogether and AWK will assume we want to print the whole line.
 		
 	awk 'NR == 2' ted.txt 
-[demo](https://youtu.be/GQ6Fj5ZWTPk)
+[demo](https://youtu.be/GQ6Fj5ZWTPk) [output](https://github.com/hunter-teacher-cert/reg_assignments-SAYbaw/blob/main/FinalProjectSabaughSpring22/Screenshots/awk_2.png)
 
 The file ted.txt has its fields separated by commas. By default, AWK separates fields by white space. To change the field separator to a comma we change the built-in variable FS. We do this by using a special pattern called BEGIN. In other words, “if you’re at the beginning of the file, change the field separator to a comma.”
 
@@ -30,7 +30,7 @@ The file ted.txt has its fields separated by commas. By default, AWK separates f
 Since there are many fields in our Ted Williams stats, we should count how many fields each line has. I will use another built-in AWK variable NF and print that variable's value to the screen after line 1 has been read.
 
 	awk 'BEGIN {FS = ","} NR == 1 {print NF}' ted.txt
-[demo](https://youtu.be/R-8MYP7eKiE)
+[demo](https://youtu.be/R-8MYP7eKiE) [output](https://github.com/hunter-teacher-cert/reg_assignments-SAYbaw/blob/main/FinalProjectSabaughSpring22/Screenshots/awk_3.png)
 
 Now that we know we have 30 fields per line, it would be helpful to make a table to number the header so we know what the field numbers are without having to squint our eyes and count on the screen. We can do this with a simple ‘for’ loop in our action block.
 
@@ -58,12 +58,12 @@ We can "pipe|" our AWK program through sort in UNIX, sorting our file by home ru
 Now let's do some data analysis on Ted Williams. Ted Williams, it has been argued, is the greatest left-handed hitter of all time. He was also the last hitter to hit .400 in a season. So let’s search for the season(s) he hit .400 and above. We’ll use our handy table we just printed to the screen to see that field 18 is BA or batting average. I will also print the year, field 1 followed by a blank space then the BA.
 
 	awk 'BEGIN {FS = ","} NR > 1 && $18 > .3999{print $1 " " $18}' ted.txt
-[demo](https://youtu.be/Tab3bI7h9tQ)
+[demo](https://youtu.be/Tab3bI7h9tQ) [output](https://github.com/hunter-teacher-cert/reg_assignments-SAYbaw/blob/main/FinalProjectSabaughSpring22/Screenshots/awk_4.png)
 
 He did it in 3 seasons. Did Ted Williams play full seasons those years? Let’s grab some more data. For .400 to be impressive you have to qualify for the batting title, meaning you have to play close to a full season. In his day a full season was 155 games, so a season with more than 100 games played would put Ted in contention for the batting title. We’ll also look at how old he was. To format these nicely, we’ll use a ‘printf()’ function, which is exactly the same as C or Java.
 
 	awk 'BEGIN {FS = ","} NR > 1 && $18 > .3999 {printf("%d %d %3d %.3f\n",$1, $2, $5, $18)}' ted.txt
-[demo](https://youtu.be/JkgIho2fDJI)
+[demo](https://youtu.be/JkgIho2fDJI) [output](https://github.com/hunter-teacher-cert/reg_assignments-SAYbaw/blob/main/FinalProjectSabaughSpring22/Screenshots/awk_5.png)
 
 We see that in 1952 and 53 Ted only played in a few games. That is because Ted was fighting in the Korean War, which you probably learned about from social studies class. In 1941 he legitimately hit .406 on the season and won the batting title making him the last player to hit .400 or more in a season. Ted was in the Marine Corps as a Fighter Pilot. Despite being an all-star ballplayer, he was not in Korea as a goodwill ambassador. He saw real combat. In fact, his wingman was John Glenn, who would go on to be the first American to orbit the earth on Mercury 6 in 1962. He was too valuable of a pilot not to fight in Korea because he had many years of experience in America’s previous conflict, WW2. 
 
@@ -135,6 +135,6 @@ Now to see what our model predicts Ted Williams would have hit in his ages 24, 2
 
 		
 	awk -f "TedWarYears.txt" ted.txt
-[demo](https://youtu.be/lOlfyYVHpHo)
+[demo](https://youtu.be/lOlfyYVHpHo) [output](https://github.com/hunter-teacher-cert/reg_assignments-SAYbaw/blob/main/FinalProjectSabaughSpring22/Screenshots/awk_6.png)
 
 There you have it. The debate and speculation are settled. If you are familiar at all with baseball statistics you may be able to tell that our model is a bit generous to the old “splendid splinter.” Die-hard fans of his, like my father, would say “yeah, that’s about right.” Teddy “Ballgame’s” legend is alive in me mostly because of hearing stories from my dad. Korean war era veterans like himself thought he was the greatest. Fresh from the air over the heat of the battle on the Korean peninsula, Ted came back from the war and finished the season by batting over .400 as if he never left. Now adding some weights and different regression methods would bring those numbers down to earth a little bit, especially those last two years, which seem impossible, but then again maybe our model is perfect because it just confirms the legend. This was a fun exercise, but this is exactly what you would do if your boss would ask you to predict sales agents on the floor to potential sales or cops on street to crimes committed.
