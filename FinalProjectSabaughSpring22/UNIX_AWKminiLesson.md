@@ -18,7 +18,7 @@ Think of it like an ‘if statement’ without writing ‘if’ and parentheses 
 	awk 'NR == 1 {print}' ted.txt
 [demo](https://youtu.be/FVSp3UWXFUw)
 
-Now you saw before I put \$0 and this time I just used print. Anything after a $ is a field number and $0 is all the fields in a line, however, if you omit $0 AWK will assume you want to print the whole line. To print the second line we just compare NR equality to 2. We can also omit the action statement altogether and AWK will assume we want to print the whole line.
+Now you saw before I put '$0' and this time I just used print. Anything after a '$' is a field number and '$0' is all the fields in a line, however, if you omit '$0' AWK will assume you want to print the whole line. To print the second line we just compare NR equality to 2. We can also omit the action statement altogether and AWK will assume we want to print the whole line.
 		
 	awk 'NR == 2' ted.txt 
 [demo](https://youtu.be/GQ6Fj5ZWTPk) | [output](https://github.com/hunter-teacher-cert/reg_assignments-SAYbaw/blob/main/FinalProjectSabaughSpring22/Screenshots/awk_2.png)
