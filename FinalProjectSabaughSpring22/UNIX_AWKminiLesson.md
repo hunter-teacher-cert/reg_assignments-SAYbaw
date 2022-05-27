@@ -63,12 +63,14 @@ Now let's do some data analysis on Ted Williams. Ted Williams, it has been argue
 He did it in 3 seasons. Did Ted Williams play full seasons those years? Let’s grab some more data. For .400 to be impressive you have to qualify for the batting title, meaning you have to play close to a full season. In his day a full season was 155 games, so a season with more than 100 games played would put Ted in contention for the batting title. We’ll also look at how old he was. To format these nicely, we’ll use a ‘printf()’ function, which is exactly the same as C or Java.
 
 	awk 'BEGIN {FS = ","} NR > 1 && $18 > .3999 {printf("%d %d %3d %.3f\n",$1, $2, $5, $18)}' ted.txt
+[demo](https://youtu.be/JkgIho2fDJI)
 
 We see that in 1952 and 53 Ted only played in a few games. That is because Ted was fighting in the Korean War, which you probably learned about from social studies class. In 1941 he legitimately hit .406 on the season and won the batting title making him the last player to hit .400 or more in a season. Ted was in the Marine Corps as a Fighter Pilot. Despite being an all-star ballplayer, he was not in Korea as a goodwill ambassador. He saw real combat. In fact, his wingman was John Glenn, who would go on to be the first American to orbit the earth on Mercury 6 in 1962. He was too valuable of a pilot not to fight in Korea because he had many years of experience in America’s previous conflict, WW2. 
 
 We’re going to use that built-in variable again NR to give us a handy reference of numbered lines in our data set. Let’s take another look at Ted’s stats.
 
-	awk '{print NR " " $0}' ted.txt 
+	awk '{print NR " " $0}' ted.txt
+[demo](https://youtu.be/B-e4iQi_0co)
 
 Notice lines 6-8. Those lines read
 
@@ -81,6 +83,7 @@ The simplest way to do this is to do a regression analysis. Linear regression is
 So first, we need to manipulate the data from those first 4 seasons. Since we have line numbers handy, we can use a traditional compound boolean statement with the built-in NR variable.
 
 	awk 'NR >= 2 && NR < 6 {print NR " " $0}' ted.txt
+[demo](https://youtu.be/-xwi0I6Ivpw)
 
 The linear regression formula is
 
@@ -132,5 +135,6 @@ Now to see what our model predicts Ted Williams would have hit in his ages 24, 2
 
 		
 	awk -f "TedWarYears.txt" ted.txt
+[demo](https://youtu.be/lOlfyYVHpHo)
 
 There you have it. The debate and speculation are settled. If you are familiar at all with baseball statistics you may be able to tell that our model is a bit generous to the old “splendid splinter.” Die-hard fans of his, like my father, would say “yeah, that’s about right.” Teddy “Ballgame’s” legend is alive in me mostly because of hearing stories from my dad. Korean war era veterans like himself thought he was the greatest. Fresh from the air over the heat of the battle on the Korean peninsula, Ted came back from the war and finished the season by batting over .400 as if he never left. Now adding some weights and different regression methods would bring those numbers down to earth a little bit, especially those last two years, which seem impossible, but then again maybe our model is perfect because it just confirms the legend. This was a fun exercise, but this is exactly what you would do if your boss would ask you to predict sales agents on the floor to potential sales or cops on street to crimes committed.
