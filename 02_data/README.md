@@ -102,4 +102,4 @@ displayData() in the getData() method with the same exact arguments.
 
 NOTE: For further instruction and comments, please see marked up
 source code in this folder Population.java.
-[or click here(https://github.com/hunter-teacher-cert/reg_assignments-SAYbaw/blob/main/02_data/A1_Data_SEDC729/src/Population.java)
+[or click here](https://github.com/hunter-teacher-cert/reg_assignments-SAYbaw/blob/main/02_data/A1_Data_SEDC729/src/Population.java)
