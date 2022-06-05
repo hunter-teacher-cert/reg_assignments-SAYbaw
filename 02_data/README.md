@@ -41,7 +41,7 @@ as your source file.
 
 Step 2 
 Create a public class named Population but for your main()
-method after your parameters write "throws FileNotFoundExcetion" before
+method after your parameters write "throws FileNotFoundException" before
 the curly braces as shown below. This is an alternative to a try/catch 
 block.
 
